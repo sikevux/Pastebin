@@ -9,9 +9,9 @@
 error_reporting(0);
 
 if(!empty($_POST['text'])) {
-#	if($sh = dns_get_record(implode('.', array_reverse(explode('.', $_SERVER['REMOTE_ADDR']))).'.sbl-xbl.spamhaus.org', DNS_A) and !empty($sh)) {
-#		header('HTTP/1.1 405 Spam Not Allowed');
-#		exit('Spammer begone!'); }
+	if($sh = dns_get_record(implode('.', array_reverse(explode('.', $_SERVER['REMOTE_ADDR']))).'.sbl-xbl.spamhaus.org', DNS_A) and !empty($sh)) {
+		header('HTTP/1.1 405 Spam Not Allowed');
+		exit('Spammer begone!'); }
 	$data = $_POST['text'];
 	$file = strtr(rtrim(base64_encode(pack('N', crc32($data))),'='),'/+','_-') . '.txt';
 	$filepath = dirname(__FILE__) . DIRECTORY_SEPARATOR . $file;
