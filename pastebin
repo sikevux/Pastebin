@@ -1,0 +1,55 @@
+#!/bin/bash
+#pastebin 0.4.1, script by Zash
+
+if [ -z "$(which curl)" ]; then
+	echo "no curl" >&2
+	exit 1
+fi
+
+if [ -z "$RECEIVER_URL" ]; then
+	RECEIVER_URL="http://pastebin.example.net/catch.php"
+fi
+
+SRC="$1"
+if [ -z "$SRC" ]; then
+	SRC=-
+fi
+
+if [ "$SRC" != "-" ]; then
+	if [ ! -f "$SRC" ]; then
+		echo "$SRC is not a regular file" >&2
+		exit 1
+	fi
+	if [ ! -r "$SRC" ]; then
+		echo "$SRC is not readable" >&2
+		exit 1
+	fi
+	TYPE="$(file --brief --mime-type --dereference "$SRC" 2>/dev/null || file --brief --mime --dereference "$SRC")"
+	if grep -q -F -x "^##${TYPE%[/]*}/*" $0 || \
+		grep -q -F -x "^##${TYPE%[;, ]*}" $0 
+	then
+		read -p "$SRC is of type $TYPE, really pastebin it? [y/N] " answer
+		case "$answer" in
+			y) ;;
+			*) exit 1;;
+		esac
+	fi
+fi
+
+TPX=$(basename $0)-$$
+OUTPUT=$(tempfile --prefix=$TPX)
+HEAD=$(tempfile --prefix=$TPX)
+
+curl --header "Expect:" --dump-header "$HEAD" --form text=\<"$SRC" $RECEIVER_URL > $OUTPUT 2>/dev/null
+if [[ $(grep 201 $HEAD 2> /dev/null | wc -l) -ge 1 ]]; then
+	head -n 1 $OUTPUT
+else
+	head -n 1 $OUTPUT
+	#grep -iE 'x-error-explanation:' $HEAD | awk -F ': ' '{print $2}'
+fi
+rm $OUTPUT $HEAD
+
+# Acceptable MIME-types.
+##text/*
+##application/x-shellscript
+##application/x-perl

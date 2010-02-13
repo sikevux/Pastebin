@@ -1,0 +1,3 @@
+# add this line to your crontab to automagicaly remove old files
+# the number after -atime determines after how many days files are "old" 
+@daily find /path/to/pastebin -type f \( -iname '*.txt' -and ! -iname robots.txt \) -atime +7 -delete
