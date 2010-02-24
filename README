@@ -18,6 +18,8 @@ Included files
 	recives and stores the paste
 * error-handler.php
 	for auto-completion like behaviour and php-code highlighting
+* handlers/
+	plugins for error-handler
 * crontab
 	a crontab entry for cleaning up pasted files
 * pastebin
