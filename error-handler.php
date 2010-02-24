@@ -18,8 +18,8 @@ if(file_exists($src)) {
 
 	default:
 		if(preg_match('/^[a-z0-9]{2,4}/', $ext)
-				and file_exists("$ext-handler.php")) {
-			include "$ext-handler.php";
+				and file_exists("handlers/$ext.php")) {
+			include "handlers/$ext.php";
 			break;}
 		header('HTTP/1.1 302 Found');
 		header('Location: ' .  $src);exit;}
