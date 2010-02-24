@@ -12,81 +12,8 @@ if(file_exists($src)) {
 		highlight_file($src);
 		break;
 
-	case 'pz':
-		echo '<code>';#<pre>';
-		if($tokens = token_get_all(file_get_contents($src))) {
-			$last_token = null;
-			$last_line = 0;
-			foreach($tokens as $token) {
-				if(!is_array($token)) {
-					$token = array(0, $token, $last_line);
-				}
-				switch(token_name($token[0])) {
-				case 'T_WHITESPACE':
-					printf(
-						'<span class="%s">%s</span>',
-						token_name($token[0]), 
-						nl2br(
-							strtr($token[1],
-							array(
-								"\t" => "<span class=\"K_TAB\">&nbsp;&nbsp;&nbsp;</span>",
-								" " => "&nbsp;",
-							))));
-					break;
-
-				case 'UNKNOWN':
-					printf('<span class="K_%s">%s</span>', ord($token[0]), htmlentities($token[1]));
-					break;
-
-				default:
-					printf('<span class="%s">%s</span>', token_name($token[0]), htmlentities($token[1]));
-					break;
-				}
-				$last_token = $token[0];
-				$last_line = $token[2];
-			}
-		} else {
-			echo ":(";
-		}
-		echo '</code>';
-		#echo '</pre></code>';
-		break;
-
 	case 'text':
 		echo nl2br(htmlspecialchars(file_get_contents($src)));
-		break;
-
-#/*
-	case 'md':
-		require 'markdown.php';
-		echo Markdown(file_get_contents($src));
-		break;
-
-	case 'tl':
-		require 'Textile.php';
-		$t = new Textile();
-		echo $t->process(file_get_contents($src));
-		break;#*/
-
-	case 'hex':
-		header('Content-Type: text/plain');
-		echo shell_exec(sprintf('hexdump -C %s', escapeshellarg($src)));
-		break;
-
-	case 'B': case 'byte':
-		header('Content-Type: text/plain');
-		echo shell_exec(sprintf('hexdump -c %s', escapeshellarg($src)));
-		break;
-
-	case 'url':
-		$data = trim(file_get_contents($src));
-		if(preg_match('/\r\n?|\n/', $data))
-			list($data) = preg_split('/\r\n?|\n/', $data, 1,  PREG_SPLIT_NO_EMPTY);
-		if(!preg_match('/^https?:\/\/.*$/', $data)) {
-			header('HTTP/1.1 302 Found');
-			header('Location: ' .  $src);exit;}
-		require 'markdown.php';
-		echo Markdown('<'.$data.'>');
 		break;
 
 	default:
