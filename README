@@ -12,12 +12,18 @@ with this. I do not consider it big enough to license under GPL or similar.
 Included files
 --------------
 
-* index.html - a form for posting to the pastebin
-* catch.php - recives and stores the paste
-* error-handler.php - for auto-completion like behaviour and php-code highlighting
-* crontab - a crontab entry for cleaning up pasted files
-* pastebin - a bash script for uploading data to pastebin
-* README - this file
+* index.html
+	a form for posting to the pastebin
+* catch.php
+	recives and stores the paste
+* error-handler.php
+	for auto-completion like behaviour and php-code highlighting
+* crontab
+	a crontab entry for cleaning up pasted files
+* pastebin
+	a bash script for uploading data to pastebin
+* README
+	this file
 
 Installation
 ------------
