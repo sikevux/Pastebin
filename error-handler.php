@@ -28,4 +28,6 @@ if(preg_match('/^\/([-_0-9a-zA-Z]{2,6})/', $_SERVER['REQUEST_URI'], $m))
 		header('Location: /' .  $matching[0]);
 		exit;}
 
+# FIXME This only works on my server.
+# Is there any way to trigger the local webservers native error page?
 header('HTTP/1.1 404 Not Found');readfile('/home/www/status/404.html');
