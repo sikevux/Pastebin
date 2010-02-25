@@ -53,3 +53,4 @@ rm $OUTPUT $HEAD
 ##text/*
 ##application/x-shellscript
 ##application/x-perl
+echo ##application/xml
