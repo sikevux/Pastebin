@@ -25,7 +25,6 @@ if [ "$SRC" != "-" ]; then
 		exit 1
 	fi
 	TYPE="$(file --brief --mime-type --dereference "$SRC" 2>/dev/null || file --brief --mime --dereference "$SRC")"
-	echo $TYPE
 	if ! ( grep -F -x "##${TYPE%[/]*}/*" $0 || \
 		grep -F -x "##${TYPE%[;, ]*}" $0 ) 
 	then
