@@ -1,6 +1,7 @@
 <?php # error-handler.php, by Zash. Part of simple pastebin-thingy.
 
 error_reporting(0);
+ob_start('ob_gzhandler');
 
 $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 $ext = pathinfo($uri, PATHINFO_EXTENSION);
