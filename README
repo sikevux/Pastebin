@@ -35,4 +35,4 @@ Installation
 3. chmod webbserver+w on the directory.
 4. If you want filename completion and syntax highlighting, configure your webserver to let error-handler.php handle 404's.
 5. Add the crontab-row to your crontab and edit the path if you want automagic cleanup.
-6. If you want to use the pastebin bash script, edit it and change $RECIVER_URL to match your setup.
+6. If you want to use the pastebin bash script, edit it and change $RECIVER_URL to match your setup or put RECIVER_URL=http://yourpastebin/catch.php in ~/.pastebinrc.
