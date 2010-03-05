@@ -1,4 +1,5 @@
 <?php
+# Half done crappy custom PHP syntax highlighter
 
 echo '<code>';#<pre>';
 if($tokens = token_get_all(file_get_contents($src))) {
