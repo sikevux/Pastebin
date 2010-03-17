@@ -6,8 +6,6 @@
  * by Zash
  */
 
-error_reporting(0);
-
 if(!empty($_POST['text'])) {
 	if($sh = dns_get_record(implode('.', array_reverse(explode('.', $_SERVER['REMOTE_ADDR']))).'.sbl-xbl.spamhaus.org', DNS_A) and !empty($sh)) {
 		header('HTTP/1.1 405 Spam Not Allowed');
