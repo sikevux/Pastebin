@@ -23,15 +23,12 @@ if(!empty($_POST['text'])) {
 			error_log("pastebin: $file uploaded from {$_SERVER['REMOTE_ADDR']}", 0);
 		} else {
 			header('HTTP/1.1 500 Internal Server Error');
-			header('X-Error-Explanation: Could not open file for writing');
 			echo 'Could not open file for writing'; }
 	} else {
 		header('HTTP/1.1 409 Conflict');
-		header('X-Error-Explanation: File exists');
 		header('Refresh: 1; URL=' . $url);
 		echo "File exists: http://{$_SERVER['HTTP_HOST']}$url\n"; }
 } else {
 	header('HTTP/1.1 303 See Other');
 	header('Location: /');
-	header('X-Error-Explanation: No input data');
 	echo 'No input data'; }
