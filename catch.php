@@ -23,7 +23,7 @@ if(!empty($_POST['text'])) {
 			error_log("pastebin: $file uploaded from {$_SERVER['REMOTE_ADDR']}", 0);
 		} else {
 			header('HTTP/1.1 500 Internal Server Error');
-			echo 'Could not open file for writing'; }
+			echo "Could not open file for writing\n"; }
 	} else {
 		header('HTTP/1.1 409 Conflict');
 		header('Refresh: 1; URL=' . $url);
@@ -31,4 +31,4 @@ if(!empty($_POST['text'])) {
 } else {
 	header('HTTP/1.1 303 See Other');
 	header('Location: /');
-	echo 'No input data'; }
+	echo "No input data\n"; }
