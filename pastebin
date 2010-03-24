@@ -48,7 +48,6 @@ if [[ $(grep 201 $HEAD 2> /dev/null | wc -l) -ge 1 ]]; then
 	head -n 1 $OUTPUT
 else
 	head -n 1 $OUTPUT
-	#grep -iE 'x-error-explanation:' $HEAD | awk -F ': ' '{print $2}'
 fi
 rm $OUTPUT $HEAD
 
