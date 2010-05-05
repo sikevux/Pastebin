@@ -12,7 +12,7 @@ if(!empty($_POST['text'])) {
 		exit('Spammer begone!'); }
 	$file = strtr(rtrim(base64_encode(pack('N', crc32($data = $_POST['text']))),'='),'/+','_-') . '.txt';
 	$filepath = dirname(__FILE__) . DIRECTORY_SEPARATOR . $file;
-	$url = str_replace(dirname(__FILE__), dirname($_SERVER['SCRIPT_NAME']), $filepath);
+	$url = str_replace(basename(__FILE__), $file, $_SERVER['SCRIPT_NAME']);
 	if(!file_exists($filepath)) {
 		if(file_put_contents($filepath, $data) !== false) {
 			header('HTTP/1.1 201 Created');
