@@ -28,6 +28,7 @@ Included files
 Installation
 ------------
 
+0. Install pdflatex
 1. Create a new subdomain or directory on your webserver (not included).
 2. Place the `catch.php` files and `index.html` in there. You can rename `index.html` if you want.
 3. `chmod webbserver+w` on the directory.
