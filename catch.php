@@ -26,13 +26,20 @@ if(!empty($_POST['text'])) {
 				exec($command);
 				exec("rm *.aux");
 				exec("ls *.log | grep -v php_errors | xargs rm -rf");
-			}
+				$pdfurl = substr($url, 0, -3) . "pdf";
 
-			header('HTTP/1.1 201 Created');
-			header('Content-Type: text/plain');
-			header('Location: ' . $url);
-			header('Refresh: 1; URL=' . $url);
-			echo "http://{$_SERVER['HTTP_HOST']}$url\n";
+				header('HTTP/1.1 201 Created');
+				header('Content-Type: text/plain');
+				header('Location: ' . $pdfurl);
+				header('Refresh: 1; URL=' . $pdfurl);
+				echo "PDF: http://{$_SERVER['HTTP_HOST']}$pdfurl\nRaw: http://{$_SERVER['HTTP_HOST']}$url\n";
+			} else {
+				header('HTTP/1.1 201 Created');
+				header('Content-Type: text/plain');
+				header('Location: ' . $url);
+				header('Refresh: 1; URL=' . $url);
+				echo "http://{$_SERVER['HTTP_HOST']}$url\n";
+			}
 			error_log("pastebin: $file uploaded from {$_SERVER['REMOTE_ADDR']}", 0);
 		} else {
 			header('HTTP/1.1 500 Internal Server Error');
