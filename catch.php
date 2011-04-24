@@ -4,7 +4,13 @@
  * shorter filename mod (b64+crc32)
  * antispam patch
  * by Zash
+ * LaTeX patch
+ * by Sikevux
  */
+
+function beginnsWith($inputData,$match) {
+	return (strcasecmp(substr($inputData, 0, strlen($match)),$match)===0);
+}
 
 if(!empty($_POST['text'])) {
 	if($sh = dns_get_record(implode('.', array_reverse(explode('.', $_SERVER['REMOTE_ADDR']))).'.sbl-xbl.spamhaus.org', DNS_A) and !empty($sh)) {
@@ -15,6 +21,13 @@ if(!empty($_POST['text'])) {
 	$url = str_replace(basename(__FILE__), $file, $_SERVER['SCRIPT_NAME']);
 	if(!file_exists($filepath)) {
 		if(file_put_contents($filepath, $data) !== false) {
+			if(beginnsWith($data, "\\documentclass")) {
+				$command = 'pdflatex '.$file;
+				exec($command);
+				exec("rm *.aux");
+				exec("ls *.log | grep -v php_errors | xargs rm -rf");
+			}
+
 			header('HTTP/1.1 201 Created');
 			header('Content-Type: text/plain');
 			header('Location: ' . $url);
