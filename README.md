@@ -4,7 +4,12 @@ Simple Pastebin
 By zash
 <http://zash.se/>
 
-This code is used here: <http://p.zash.se/>
+and hacked by Sikevux
+<http://sikevux.se/>
+
+Zash's code is used here: <http://p.zash.se/>
+
+Sikevux's code is used here: <http://c0re.se/>
 
 Consider this to be in the public domain. You are free to do whatever you want
 with this. I do not consider it big enough to license under GPL or similar.
